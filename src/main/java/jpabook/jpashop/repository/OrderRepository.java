@@ -1,5 +1,6 @@
 package jpabook.jpashop.repository;
 
+
 import jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -61,5 +62,16 @@ public class OrderRepository {
 
 
     }
+
+    public List<Order> findAllwithmemberDelivery() {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d", Order.class)
+                .getResultList();
+
+    }
+
+
 
 }
