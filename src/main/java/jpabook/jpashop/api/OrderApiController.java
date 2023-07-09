@@ -79,6 +79,11 @@ public class OrderApiController {
         return orderQueryRepository.findOrderQueryDtos();
     }
 
+    @GetMapping("/api/v5/orders")
+    public List<OrderQueryDto> orderV5() {
+        return orderQueryRepository.findAllByDto_optim();
+    }
+
     @Data
     static class OrderDto {
         private Long orderId;
@@ -87,6 +92,7 @@ public class OrderApiController {
         private OrderStatus orderStatus;
         private Address address;
         private List<OrderItemDto> orderItems;
+
         public OrderDto(Order order) {
             orderId = order.getId();
             name = order.getMember().getName();
@@ -94,7 +100,7 @@ public class OrderApiController {
             orderStatus = order.getStatus();
             address = order.getDelivery().getAddress();
             orderItems = order.getOrderItems().stream()
-                     .map(orderItem -> new OrderItemDto(orderItem))
+                    .map(orderItem -> new OrderItemDto(orderItem))
                     .collect(Collectors.toList());
         }
     }
