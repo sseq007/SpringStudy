@@ -20,7 +20,7 @@ public class MemberRepositoryTest {
     @Autowired
     MemberService memberService;
     @Autowired
-    MemberRepository memberRepository;
+    MemberRepositoryOld memberRepository;
     @Test
     public void 회원가입() throws Exception {
         //given
